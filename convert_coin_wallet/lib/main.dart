@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'pages/NavegationBar.dart';
 
-void main() {
+import 'package:convert_coin_wallet/elementos/DatabaseHelper.dart';
+
+Future<void> main() async {
+
+  final dbHelper = DatabaseHelper();
+  await dbHelper.database;
   runApp(MyApp());
 }
 
