@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:convert_coin_wallet/elementos/ConversionCard.dart';
-import 'package:convert_coin_wallet/models/ConversionesClass.dart';
+import 'package:provider/provider.dart';
+import 'package:convert_coin_wallet/models/WalletClass.dart';
 
 class WalletPage extends StatefulWidget {
   @override
@@ -8,17 +8,17 @@ class WalletPage extends StatefulWidget {
 }
 
 class _WalletPage extends State<WalletPage> {
-  List<Conversion> conversions = [
-    Conversion("CLP", 2000, "DLR", 2.0),
-    Conversion("CLP", 5000, "USD", 6.0),
-    Conversion("EUR", 20, "GBP", 17.0),
-    Conversion("EUR", 20, "GBP", 17.0),
-    Conversion("EUR", 20, "GBP", 17.0),
-    Conversion("EUR", 20, "GBP", 17.0),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final conversionesWaller = Provider.of<WalletMoney>(context);
+    final items = conversionesWaller.conversiones;
+
+    // Calcular la suma de todos los montos finales, manejando valores nulos
+    final double sumaMontosFinales = items.fold(
+      0.0,
+      (sum, conversion) => sum + (conversion.montoConvertido ?? 0.0),
+    );
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -45,7 +45,7 @@ class _WalletPage extends State<WalletPage> {
                     SizedBox(height: 16),
                     Center(
                       child: Text(
-                        "\$2.000",
+                        "\$${sumaMontosFinales.toStringAsFixed(0)}", // Mostrar la suma redondeada
                         style: TextStyle(
                             fontSize: 32, fontWeight: FontWeight.bold),
                       ),
@@ -74,22 +74,75 @@ class _WalletPage extends State<WalletPage> {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  children: conversions.map((conversion) {
-                    return ConversionCard(conversion: conversion);
+                  children: items.map((conversion) {
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      color:
+                          Color(0xFFF4F0FF), // Color de fondo similar al diseño
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Moneda y valor de origen
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  conversion.monedaOriginal,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  conversion.montoOriginal.toString(),
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                            // Icono de flecha
+                            Icon(
+                              Icons.arrow_forward,
+                              size: 24,
+                              color: Colors.black,
+                            ),
+                            // Moneda y valor de destino
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  conversion.monedaConvertida,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  '\$${(conversion.montoConvertido ?? 0).toStringAsFixed(2)}',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                            // Botón de eliminar
+                            IconButton(
+                              icon: Icon(Icons.delete, color: Colors.red),
+                              onPressed: () => conversionesWaller
+                                  .eliminarConversion(conversion.indice),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
                   }).toList(),
                 ),
               ),
             ),
           ],
         ),
-      ),
-
-      // Botón flotante
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Acción del botón
-        },
-        child: Icon(Icons.add),
       ),
     );
   }

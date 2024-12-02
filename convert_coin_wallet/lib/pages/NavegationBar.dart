@@ -19,7 +19,7 @@ class _NavigationBarAppState extends State<NavigationBarApp> {
   final List<Widget> _pages = [
     HomePage(),
     WalletPage(),
-    FavoritePage(),
+    Favoritepage(),
     SettingsScreen(),
   ];
 

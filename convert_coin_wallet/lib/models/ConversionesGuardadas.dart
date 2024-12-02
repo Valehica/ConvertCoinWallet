@@ -6,13 +6,14 @@ class Conversion {
   final double? montoConvertido;
   final String monedaOriginal;
   final String monedaConvertida;
+  final int indice;
 
-  Conversion({
-    required this.montoOriginal,
-    required this.montoConvertido,
-    required this.monedaOriginal,
-    required this.monedaConvertida,
-  });
+  Conversion(
+      {required this.montoOriginal,
+      required this.montoConvertido,
+      required this.monedaOriginal,
+      required this.monedaConvertida,
+      required this.indice});
 }
 
 // Clase para manejar las conversiones guardadas

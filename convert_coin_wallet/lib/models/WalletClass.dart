@@ -6,13 +6,14 @@ class Wallet {
   final double? montoConvertido;
   final String monedaOriginal;
   final String monedaConvertida;
+  final int indice;
 
-  Wallet({
-    required this.montoOriginal,
-    required this.montoConvertido,
-    required this.monedaOriginal,
-    required this.monedaConvertida,
-  });
+  Wallet(
+      {required this.montoOriginal,
+      required this.montoConvertido,
+      required this.monedaOriginal,
+      required this.monedaConvertida,
+      required this.indice});
 }
 
 // Clase para manejar las conversiones guardadas

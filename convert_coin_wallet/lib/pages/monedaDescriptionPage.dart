@@ -1,3 +1,4 @@
+import 'package:convert_coin_wallet/models/WalletClass.dart';
 import 'package:flutter/material.dart';
 import 'package:convert_coin_wallet/elementos/AppColors.dart';
 import 'package:convert_coin_wallet/models/MonedaClass.dart';
@@ -110,6 +111,7 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
   // Función para la vista de Compra
   Widget _buildCompraView() {
     final conversionesGuardadas = Provider.of<ConversionesGuardadas>(context);
+    int indiceFav = 0;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -170,17 +172,15 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
 
                 // Comprobamos si montoIngresado no es nulo y si widget.moneda.compra no es nulo
                 if (montoIngresado != null && widget.moneda.compra != null) {
-                  ingresoMoneda = montoIngresado;
                   if (widget.moneda.compra != 0) {
                     _resultadoConversion =
                         montoIngresado / widget.moneda.compra!;
+                    ingresoMoneda = montoIngresado;
                   } else {
-                    _resultadoConversion =
-                        null; // Si el valor de compra es 0, asignamos null
+                    _resultadoConversion = 0;
                   }
                 } else {
-                  _resultadoConversion =
-                      null; // Si montoIngresado o widget.moneda.compra son nulos
+                  _resultadoConversion = 0;
                 }
               });
             },
@@ -256,7 +256,28 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
                       montoOriginal: ingresoMoneda,
                       montoConvertido: _resultadoConversion,
                       monedaOriginal: 'CLP',
-                      monedaConvertida: widget.moneda.toString()));
+                      monedaConvertida: widget.moneda.moneda.toString(),
+                      indice: indiceFav));
+                  setState(() {
+                    indiceFav++;
+                  });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Éxito'),
+                        content: Text('Se ha agregado correctamente.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Cierra la alerta
+                            },
+                            child: Text('Aceptar'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 child: const Text(
                   'Guardar conversión',
@@ -272,6 +293,10 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
 
   // Función para la vista de Venta
   Widget _buildVentaView() {
+    final conversionesGuardadas = Provider.of<ConversionesGuardadas>(context);
+    final walletGuardado = Provider.of<WalletMoney>(context);
+    int indiceWallet = 0;
+    int indicFav = 0;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -372,7 +397,7 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
                         SizedBox(height: 8),
                         Center(
                           child: Text(
-                            widget.moneda.moneda,
+                            'CLP',
                             style: TextStyle(fontSize: 16, color: Colors.grey),
                           ),
                         ),
@@ -403,7 +428,34 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    conversionesGuardadas.agregarConversion(Conversion(
+                        montoOriginal: _resultadoConversion,
+                        montoConvertido: ingresoMoneda,
+                        monedaOriginal: widget.moneda.moneda.toString(),
+                        monedaConvertida: 'CLP',
+                        indice: indicFav));
+                    setState(() {
+                      indicFav++;
+                    });
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Éxito'),
+                          content: Text('Se ha agregado correctamente.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Cierra la alerta
+                              },
+                              child: Text('Aceptar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                   child: const Text(
                     'Guardar conversión',
                     style: TextStyle(fontSize: 16, color: AppColors.background),
@@ -421,11 +473,36 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
                     ),
                   ),
                   onPressed: () {
-                    // Acción del botón adicional
-                    print('Botón adicional presionado');
+                    walletGuardado.agregarConversion(Wallet(
+                        montoOriginal: ingresoMoneda,
+                        montoConvertido: _resultadoConversion,
+                        monedaOriginal: widget.moneda.moneda.toString(),
+                        monedaConvertida: 'CLP',
+                        indice: indiceWallet));
+
+                    setState(() {
+                      indiceWallet++;
+                    });
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Éxito'),
+                          content: Text('Se ha agregado correctamente.'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); // Cierra la alerta
+                              },
+                              child: Text('Aceptar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   child: const Text(
-                    'Botón adicional',
+                    'Guardar en Billetera',
                     style: TextStyle(fontSize: 16, color: AppColors.background),
                   ),
                 ),
