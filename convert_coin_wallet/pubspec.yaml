@@ -18,6 +18,8 @@ dependencies:
   provider: ^6.0.5
   shared_preferences: ^2.0.15
   flutter_native_splash: ^2.3.0
+  flutter_launcher_icons: ^0.14.1
+  share_plus: ^10.1.2
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +34,11 @@ flutter_native_splash:
   android: true
   ios: true
 
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/images/logo.png
+  
 flutter:
 
   uses-material-design: true
@@ -45,3 +52,4 @@ flutter:
     - assets/images/brasil_flag.png
     - assets/images/error.png
     - assets/images/icono.png
+    - assets/images/logo.png

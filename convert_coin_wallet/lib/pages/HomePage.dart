@@ -158,9 +158,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                SizedBox(width: 50),
+                SizedBox(width: 40),
                 Icon(Icons.arrow_forward, size: 24),
-                SizedBox(width: 50),
+                SizedBox(width: 40),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [

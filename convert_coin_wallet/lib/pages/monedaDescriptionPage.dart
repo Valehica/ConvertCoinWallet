@@ -27,85 +27,86 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Conversion',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: AppColors.background),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: AppColors.secondary,
-      ),
-      body: Column(
-        children: [
-          // Navigation Bar
-          Container(
-            color: AppColors.backgroundSecundary,
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => setState(() => _currentIndex = 0),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      alignment: Alignment.center,
-                      color: _currentIndex == 0
-                          ? AppColors.backgroundSecundary
-                          : AppColors.backgroundSecundary,
-                      child: Text('Compra',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: _currentIndex == 0
-                                ? AppColors.secondary
-                                : AppColors.primary,
-                          )),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => setState(() => _currentIndex = 1),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      alignment: Alignment.center,
-                      color: _currentIndex == 1
-                          ? AppColors.backgroundSecundary
-                          : AppColors.backgroundSecundary,
-                      child: Text('Venta',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: _currentIndex == 0
-                                ? AppColors.primary
-                                : AppColors.secondary,
-                          )),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+        appBar: AppBar(
+          title: const Text(
+            'Conversion',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: AppColors.background),
           ),
-          const SizedBox(height: 20),
-          // Mostrar la vista de Compra o Venta según el índice seleccionado
-          if (_currentIndex == 0) _buildCompraView() else _buildVentaView(),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          backgroundColor: AppColors.secondary,
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Navigation Bar
+              Container(
+                color: AppColors.backgroundSecundary,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _currentIndex = 0),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          alignment: Alignment.center,
+                          color: _currentIndex == 0
+                              ? AppColors.backgroundSecundary
+                              : AppColors.backgroundSecundary,
+                          child: Text('Compra',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: _currentIndex == 0
+                                    ? AppColors.secondary
+                                    : AppColors.primary,
+                              )),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _currentIndex = 1),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          alignment: Alignment.center,
+                          color: _currentIndex == 1
+                              ? AppColors.backgroundSecundary
+                              : AppColors.backgroundSecundary,
+                          child: Text('Venta',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: _currentIndex == 0
+                                    ? AppColors.primary
+                                    : AppColors.secondary,
+                              )),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              // Mostrar la vista de Compra o Venta según el índice seleccionado
+              if (_currentIndex == 0) _buildCompraView() else _buildVentaView(),
 
-          const SizedBox(height: 20),
-          const SizedBox(height: 10),
-          // Fecha de actualización
-          Text(
-            'Fecha de actualización: ${widget.moneda.fechaActualizacion}',
-            style: const TextStyle(fontSize: 16, color: AppColors.primary),
+              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+              // Fecha de actualización
+              Text(
+                'Fecha de actualización: ${widget.moneda.fechaActualizacion}',
+                style: const TextStyle(fontSize: 16, color: AppColors.primary),
+              ),
+              const SizedBox(height: 10),
+            ],
           ),
-          const SizedBox(height: 10),
-        ],
-      ),
-    );
+        ));
   }
 
   // Función para la vista de Compra
