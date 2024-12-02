@@ -11,7 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sqflite: ^2.0.0+4
+  sqflite: ^2.0.0+3
+  path: ^1.8.2
   cupertino_icons: ^1.0.8
   http: ^1.0.0
 
@@ -32,3 +33,4 @@ flutter:
     - assets/images/EEUU_flag.png
     - assets/images/españa_flag.png
     - assets/images/brasil_flag.png
+    - assets/images/error.png

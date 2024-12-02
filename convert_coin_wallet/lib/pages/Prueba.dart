@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:convert_coin_wallet/DTBS/DolarApiService.dart';
+import 'package:convert_coin_wallet/elementos/DolarApiService.dart';
 import 'package:convert_coin_wallet/models/MonedaClass.dart';
 
 class MonedasScreen extends StatelessWidget {

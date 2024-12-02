@@ -4,9 +4,7 @@ import 'pages/NavegationBar.dart';
 import 'package:convert_coin_wallet/elementos/DatabaseHelper.dart';
 
 Future<void> main() async {
-
-  final dbHelper = DatabaseHelper();
-  await dbHelper.database;
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

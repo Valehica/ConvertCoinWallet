@@ -15,7 +15,7 @@ class _NavigationBarAppState extends State<NavigationBarApp> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    MonedasScreen(),
+    HomePage(),
     WalletPage(),
     FavotitePage(),
     SettingsScreen(),
