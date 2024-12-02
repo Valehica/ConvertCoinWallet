@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:convert_coin_wallet/elementos/AppColors.dart';
 import 'package:convert_coin_wallet/models/MonedaClass.dart';
 
+import 'package:share_plus/share_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:convert_coin_wallet/models/ConversionesGuardadas.dart';
 
@@ -234,6 +235,10 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
                     onPressed: () {
                       // Acción al presionar el icono de compartir
                       print('Compartir información de la moneda');
+                      final String mensaje = _resultadoConversion != null
+                          ? "¡Hola! La Compra de ${ingresoMoneda?.toStringAsFixed(2)} CLP equivale a ${_resultadoConversion?.toStringAsFixed(2)} ${widget.moneda.moneda}."
+                          : "No se pudo calcular la conversión.";
+                      Share.share(mensaje);
                     },
                   ),
                 ],
@@ -411,6 +416,11 @@ class _MonedaDescriptionState extends State<MonedaDescription> {
                     onPressed: () {
                       // Acción al presionar el icono de compartir
                       print('Compartir información de la moneda');
+
+                      final String mensaje = _resultadoConversion != null
+                          ? "¡Hola! La venta de ${_resultadoConversion?.toStringAsFixed(2)} ${widget.moneda.moneda}  equivale a ${ingresoMoneda?.toStringAsFixed(2)} CLP ."
+                          : "No se pudo calcular la conversión.";
+                      Share.share(mensaje);
                     },
                   ),
                 ],
