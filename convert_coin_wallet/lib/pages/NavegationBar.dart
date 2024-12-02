@@ -23,7 +23,7 @@ class _NavigationBarAppState extends State<NavigationBarApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Navigation Bar'),
+        title: Text('Convert Coin Wallet'),
       ),
       body: _pages[_currentIndex], // Muestra la página seleccionada
       bottomNavigationBar: NavigationBar(
@@ -52,15 +52,6 @@ class _NavigationBarAppState extends State<NavigationBarApp> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Página de Inicio', style: TextStyle(fontSize: 24)),
     );
   }
 }

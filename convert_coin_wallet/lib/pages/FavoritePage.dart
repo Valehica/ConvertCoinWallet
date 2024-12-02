@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:convert_coin_wallet/models/ConversionesClass.dart';
 
 import 'package:convert_coin_wallet/elementos/ConversionCard.dart';
-import 'package:convert_coin_wallet/models/ConversionesClass.dart';
 
 class FavotitePage extends StatefulWidget {
   const FavotitePage({Key? key}) : super(key: key);
