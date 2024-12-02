@@ -5,6 +5,7 @@ import 'package:convert_coin_wallet/elementos/DatabaseHelper.dart';
 import 'package:provider/provider.dart';
 import 'package:convert_coin_wallet/models/ConversionesGuardadas.dart';
 import 'package:convert_coin_wallet/models/WalletClass.dart';
+import 'package:convert_coin_wallet/pages/SplashScreen.dart'; // Importa la pantalla SplashScreen.
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: NavigationBarApp(),
+      initialRoute: '/splash', // Define la ruta inicial.
+      routes: {
+        '/splash': (context) => SplashScreen(), // Pantalla de inicio.
+        '/home': (context) => NavigationBarApp(), // Pantalla principal.
+      },
     );
   }
 }
