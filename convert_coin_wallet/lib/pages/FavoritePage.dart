@@ -1,70 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:convert_coin_wallet/models/ConversionesClass.dart';
+import 'package:provider/provider.dart';
+import 'package:convert_coin_wallet/models/ConversionesGuardadas.dart';
 
-import 'package:convert_coin_wallet/elementos/ConversionCard.dart';
-
-class FavotitePage extends StatefulWidget {
-  const FavotitePage({Key? key}) : super(key: key);
-
-  @override
-  State<FavotitePage> createState() => _FavotitePage();
-}
-
-class _FavotitePage extends State<FavotitePage> {
-  // Lista de conversiones para mostrar
-  List<Conversion> conversions = [
-    Conversion("CLP", 2000, "DLR", 2.0),
-    Conversion("CLP", 5000, "USD", 6.0),
-    Conversion("EUR", 20, "GBP", 17.0),
-    Conversion("EUR", 20, "GBP", 17.0),
-    Conversion("EUR", 20, "GBP", 17.0),
-    Conversion("EUR", 20, "GBP", 17.0),
-  ];
-
-  String searchQuery = "";
-
+class FavoritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Filtrar conversiones según el texto de búsqueda
-    final filteredConversions = conversions.where((conversion) {
-      final fromCurrency = conversion.fromCurrency.toLowerCase();
-      final toCurrency = conversion.toCurrency.toLowerCase();
-      return fromCurrency.contains(searchQuery.toLowerCase()) ||
-          toCurrency.contains(searchQuery.toLowerCase());
-    }).toList();
+    final conversiones = Provider.of<ConversionesGuardadas>(context);
+    final items =
+        conversiones.conversiones; // Accede a la lista de conversiones
 
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          // Buscador
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  searchQuery = value;
-                });
-              },
-              decoration: InputDecoration(
-                labelText: 'Buscar',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+      appBar: AppBar(
+        title: Text('Conversiones Guardadas'),
+      ),
+      body: ListView.builder(
+        itemCount: items.length, // Usar items.length
+        itemBuilder: (context, index) {
+          final conversion =
+              items[index]; // Usar items en lugar de conversiones
+          return Card(
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: ListTile(
+              title: Text(
+                'Monto Original: \$${conversion.montoOriginal?.toStringAsFixed(2)} ${conversion.monedaOriginal}',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                'Monto Convertido: \$${conversion.montoConvertido?.toStringAsFixed(2)} ${conversion.monedaConvertida}',
               ),
             ),
-          ),
-          // Lista con scroll vertical
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredConversions.length,
-              itemBuilder: (context, index) {
-                return ConversionCard(conversion: filteredConversions[index]);
-              },
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

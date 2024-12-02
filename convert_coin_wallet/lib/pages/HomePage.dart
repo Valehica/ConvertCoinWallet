@@ -1,9 +1,13 @@
+import 'package:convert_coin_wallet/pages/monedaDescriptionPage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:convert_coin_wallet/models/MonedaClass.dart';
 import 'package:convert_coin_wallet/elementos/Repository.dart';
 import 'package:convert_coin_wallet/elementos/DatabaseHelper.dart';
 import 'package:convert_coin_wallet/elementos/banderas.dart';
+import 'package:convert_coin_wallet/elementos/AppColors.dart';
+
+import 'monedaDescriptionPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -106,29 +110,26 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildCurrencyCard(Moneda moneda) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(
+          horizontal: 25.0, vertical: 8.0), // Incrementa el valor vertical
       child: GestureDetector(
         onTap: () {
-          // Aquí va la acción que quieres realizar cuando se toque la card.
-          // En este caso, mostramos un SnackBar como ejemplo.
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Moneda seleccionada: ${moneda.moneda}'),
-              duration: Duration(seconds: 2),
-            ),
-          );
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MonedaDescription(moneda: moneda)));
         },
         child: SizedBox(
           height: 130, // Altura fija para la tarjeta
           child: Container(
             padding: EdgeInsets.all(12.0),
             decoration: BoxDecoration(
-              color: Color(0xFFF5F5FF), // Fondo lavanda claro
-              borderRadius: BorderRadius.circular(16.0),
+              color: AppColors.backgroundSecundary, // Fondo lavanda claro
+              borderRadius: BorderRadius.circular(30.0),
             ),
             child: Row(
               children: [
-                SizedBox(width: 12),
+                SizedBox(width: 18),
                 Image.asset(
                   banderas
                       .getRutaPorNombre(moneda.moneda)
@@ -157,9 +158,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                SizedBox(width: 70),
+                SizedBox(width: 50),
                 Icon(Icons.arrow_forward, size: 24),
-                SizedBox(width: 70),
+                SizedBox(width: 50),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [

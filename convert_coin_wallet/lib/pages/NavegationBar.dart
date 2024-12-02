@@ -4,6 +4,8 @@ import 'WalletPage.dart';
 import 'HomePage.dart';
 import 'FavoritePage.dart';
 
+import 'package:convert_coin_wallet/elementos/AppColors.dart';
+
 import 'Prueba.dart';
 
 class NavigationBarApp extends StatefulWidget {
@@ -17,7 +19,7 @@ class _NavigationBarAppState extends State<NavigationBarApp> {
   final List<Widget> _pages = [
     HomePage(),
     WalletPage(),
-    FavotitePage(),
+    FavoritePage(),
     SettingsScreen(),
   ];
 
@@ -25,7 +27,12 @@ class _NavigationBarAppState extends State<NavigationBarApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Convert Coin Wallet'),
+        title: Text(
+          'Convert Coin Wallet',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: AppColors.background),
+        ),
+        backgroundColor: AppColors.secondary,
       ),
       body: _pages[_currentIndex], // Muestra la página seleccionada
       bottomNavigationBar: NavigationBar(
