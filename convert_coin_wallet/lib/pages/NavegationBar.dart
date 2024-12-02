@@ -4,6 +4,8 @@ import 'WalletPage.dart';
 import 'HomePage.dart';
 import 'FavoritePage.dart';
 
+import 'Prueba.dart';
+
 class NavigationBarApp extends StatefulWidget {
   @override
   _NavigationBarAppState createState() => _NavigationBarAppState();
@@ -13,7 +15,7 @@ class _NavigationBarAppState extends State<NavigationBarApp> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    HomePage(),
+    MonedasScreen(),
     WalletPage(),
     FavotitePage(),
     SettingsScreen(),

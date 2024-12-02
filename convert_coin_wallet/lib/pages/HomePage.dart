@@ -3,11 +3,7 @@ import 'package:convert_coin_wallet/models/MonedasClass.dart';
 import 'package:convert_coin_wallet/models/MonedaClass.dart';
 
 class HomePage extends StatelessWidget {
-  final Monedas monedas = Monedas([
-    Moneda(2000.0, 2000.0, 1990.0, 'DLR', 'USD', '2024-12-01'),
-    Moneda(1500.0, 1505.0, 1503.0, 'EUR', 'EUR', '2024-12-01'),
-    Moneda(1000.0, 1002.0, 998.0, 'GBP', 'GBP', '2024-12-01'),
-  ]);
+  final Monedas monedas = Monedas([]);
 
   @override
   Widget build(BuildContext context) {
