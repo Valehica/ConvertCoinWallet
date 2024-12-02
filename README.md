@@ -40,5 +40,6 @@ https://drive.google.com/file/d/1AbK0azKVQOLupxQWv45fz99gWZI-I1cW/view?usp=shari
 ## **URL de acceso al video**  
 
 Visualiza un video de la presentación de la aplicación
-https://drive.google.com/file/d/1AbK0azKVQOLupxQWv45fz99gWZI-I1cW/view?usp=sharing
+
+https://drive.google.com/file/d/1OPaEZOK63OICeC_UQQ-iYnWHd932SIJJ/view?usp=sharing
 
